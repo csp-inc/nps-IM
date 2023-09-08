@@ -1,0 +1,9 @@
+unit code column: Unit_Code
+site id column: Plot_ID
+event date info:
+    date-time column: Start_Date
+    date-time format:
+        - Y!-m!*-d! I!:M!:S!  # see lubridate::parse_date_time() for details
+        - Y!-m!*-d!
+        - m!*/d!/Y!
+        - Y!
