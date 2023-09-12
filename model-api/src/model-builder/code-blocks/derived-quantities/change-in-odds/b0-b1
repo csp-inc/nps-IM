@@ -1,0 +1,1 @@
+        change.in.odds[k] <- exp(B.tilde[2, k])  # was: mu.B1[k], which I think is wrong
