@@ -1,0 +1,35 @@
+# Authors: L. J. Zachmann and N. T. Hobbs. 2021.
+
+# == top
+# Generalized JAGS program used to parameterize NPS I&M program hierarchical
+# status-and-trends models. Each 'switch' corresponds to code blocks for data,
+# parameters, model (priors and likelihood), and derived quantities.
+# == bottom
+
+model {
+
+    # ---- priors -------------------------------------------------------------
+    DISTRIBUTION_PARAMS_SWITCH
+    MAX_R_SWITCH
+    COVARIATE_PARAMS_SWITCH
+    GROUP_LEVEL_EFFECTS_SWITCH
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(Y_SWITCH)) {
+        RANDOM_BETA_SWITCH
+        DETERMINISTIC_MOD_SWITCH
+        LIKELIHOOD_SWITCH
+        CENSOR_SWITCH_LIKELIHOOD
+        ## Residuals.
+        RESIDUALS_SWITCH
+    }
+    L_FOR_PA_HURDLE_SWITCH
+
+    # ---- model checking -----------------------------------------------------
+    MODEL_CHECKING_COMMENT
+    MODEL_CHECKING_SWITCH
+    BAYESIAN_P_VALUES_SWITCH
+
+    COMPLETE_SET_OF_DERIVED_QUANTITIES
+
+}

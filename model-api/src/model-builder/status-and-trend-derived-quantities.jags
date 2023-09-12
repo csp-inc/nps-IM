@@ -1,0 +1,38 @@
+    # ---- derived quantities -------------------------------------------------
+    DEFLECTIONS_SWITCH
+    for(k in 1:y.n.strata) {
+        CHANGE_IN_ODDS_SWITCH
+        ## Predictions of the response (both the *mean* of new observations and
+        ## *individual observations*) for each site, j, in each stratum k, at
+        ## each time, t, in the unit vector `x.hat` (pg. 197 of Hobbs and
+        ## Hooten 2015).
+        for(j in 1:y.n.site[k]) {
+            TAU_SITE_SWITCH
+            SITE_EPS_SWITCH
+            SITE_Z_SWITCH
+            for(t in 1:length(x.hat)) {
+                ### The posterior predictive distribution of the mean of new
+                ### observations.
+                HAT_SITE_MEAN_SWITCH
+                ### The posterior predictive distribution of an individual
+                ### observation.
+                HAT_Y_SIM_SWITCH
+            }
+        }
+    }
+    for(k in 1:y.n.strata) {
+
+        ## Predictions of the mean response of each stratum, k, at each time,
+        ## t, in the unit vector `x.hat`.
+        STRATUM_Z_SWITCH
+        HAT_STRATUM_SWITCH
+        PRED_STRATUM_SWITCH
+    }
+    HAT_STRAT_DEFL_MEAN
+    TREND_STRAT_SWITCH
+    TREND_ZONE_SWITCH
+    PRED_SITE_MEAN_SWITCH
+    MISC_PARK_LEVEL_INFERENCE_SWITCH
+    HAT_PARK_SWITCH
+    PRED_PARK_SWITCH
+    GLE_DEP_PARK_LEVEL_INFERENCE_SWITCH
