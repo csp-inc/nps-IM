@@ -1,0 +1,6 @@
+            phi.hat.strat.oos[t, k] <- ilogit(
+                G0.tilde[k]
+            )
+            mu.hat.strat.oos[t, k] <- ilogit(
+                B0.tilde[k]
+            )
