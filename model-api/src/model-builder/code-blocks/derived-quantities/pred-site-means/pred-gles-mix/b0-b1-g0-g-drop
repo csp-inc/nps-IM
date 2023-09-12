@@ -1,0 +1,6 @@
+        phi.pred.site.oos[j.pred[i], x.pred.index[i], k.pred[i]] <- ilogit(
+            mu.G0[k.pred[i]]
+          )
+        mu.pred.site.oos[j.pred[i], x.pred.index[i], k.pred[i]] <- ilogit(
+            mu.B0[k.pred[i]] + mu.B1[k.pred[i]] * x.pred[i] + X.pred[i, ] %*% Beta
+          )
