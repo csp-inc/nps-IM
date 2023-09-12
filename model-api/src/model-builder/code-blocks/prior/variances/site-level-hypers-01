@@ -1,0 +1,3 @@
+        mu.beta.sigma[k] ~ dnorm(0, pow(1.5, -2))
+        sigma.beta.sigma[k] ~ dgamma(0.01, 0.01)
+        tau.beta.sigma[k] <- pow(sigma.beta.sigma[k], -2)

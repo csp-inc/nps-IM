@@ -1,0 +1,2 @@
+        mu.sigma[k] ~ MU_SIGMA_PRIOR_DIST(MU_G_SHAPE, MU_G_RATE)
+        sigma.sigma[k] ~ SIGMA_SIGMA_PRIOR_DIST(SIGMA_G_SHAPE, SIGMA_G_RATE)

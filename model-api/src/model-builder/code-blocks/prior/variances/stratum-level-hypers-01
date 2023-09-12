@@ -1,0 +1,1 @@
+        beta.sigma[k] ~ dnorm(0, pow(1.5, -2))

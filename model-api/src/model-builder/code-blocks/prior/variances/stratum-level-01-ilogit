@@ -1,0 +1,1 @@
+            sigma.ss[j, k] <- ilogit(beta.sigma[k])

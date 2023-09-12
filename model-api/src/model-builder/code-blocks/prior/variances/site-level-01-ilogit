@@ -1,0 +1,9 @@
+              # IF `y.q` == 0, then variances are estimated on a per-site basis
+              # independently. IF `y.q` == 1, then site-level variances are drawn
+              # from a common (gamma) distribution with mean `mu.sigma` and
+              # variance `sigma.sigma`.
+              beta.sigma[j, k] ~ dnorm(
+                  y.q * mu.beta.sigma[k] + (1 - y.q) * 0,
+                  y.q * tau.beta.sigma[k] + (1 - y.q) * pow(1.5, -2)
+              )
+              sigma.ss[j, k] <- ilogit(beta.sigma[j, k])  # sigma.ss[j, k] ~ dunif(0, 1)

@@ -1,0 +1,8 @@
+              # IF `y.q` == 0, then variances are estimated on a per-site basis
+              # independently. IF `y.q` == 1, then site-level variances are drawn
+              # from a common (gamma) distribution with mean `mu.sigma` and
+              # variance `sigma.sigma`.
+              sigma.ss[j, k] ~ dgamma(
+                  y.q * mu.sigma[k]^2 / sigma.sigma[k]^2 + (1 - y.q) * .01,
+                  y.q * mu.sigma[k] / sigma.sigma[k]^2 + (1 - y.q) * .01
+              )
