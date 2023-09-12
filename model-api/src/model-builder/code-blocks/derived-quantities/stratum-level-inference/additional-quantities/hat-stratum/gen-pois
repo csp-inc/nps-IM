@@ -1,0 +1,7 @@
+            hat.strat.lambda[t, k] <-
+                (1 - delta[k]) * exp(hat.strat.eta[t, k])
+            hat.strat.mean[t, k] <- hat.strat.lambda[t, k] / (1 - delta[k])
+
+            hat.strat.lambda.oos[t, k] <-
+                (1 - delta[k]) * exp(hat.strat.eta.oos[t, k])
+            hat.strat.mean.oos[t, k] <- hat.strat.lambda.oos[t, k] / (1 - delta[k])
