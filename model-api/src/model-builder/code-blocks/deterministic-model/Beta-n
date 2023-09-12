@@ -1,0 +1,5 @@
+        for(m in 1:length(X[1, ])) {
+          Beta.n[n, m] <- ifelse(is.rand.slope[m] == 0,
+                                 Beta[m],
+                                 Beta.grp[y.site[n], min(m, n.rand.slopes), y.strata[n]])
+        }
