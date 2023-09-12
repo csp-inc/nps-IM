@@ -1,0 +1,12 @@
+                hat.zone.pr[t, l, 1] <-
+                    pnorm(theta[1], hat.zone.mu[t, l] , hat.tau.tilde[t, k.for.j.draw.zone[t, l]])
+                for (m in 2:(nYlevels - 1)) {
+                  hat.zone.pr[t, l, m] <-
+                    max(0, pnorm(theta[m] , hat.zone.mu[t, l], hat.tau.tilde[t, k.for.j.draw.zone[t, l]]) -
+                        pnorm(theta[m - 1] , hat.zone.mu[t, l] , hat.tau.tilde[t, k.for.j.draw.zone[t, l]]))
+                }
+                hat.zone.pr[t, l, nYlevels] <-
+                    1 - pnorm(theta[nYlevels - 1], hat.zone.mu[t, l] , hat.tau.tilde[t, k.for.j.draw.zone[t, l]])
+
+                hat.zone.mean[t, l] <-
+                    inprod(hat.zone.pr[t, l, 1:nYlevels], 1:nYlevels)
