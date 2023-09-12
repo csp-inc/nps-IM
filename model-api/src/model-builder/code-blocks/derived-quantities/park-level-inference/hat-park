@@ -1,0 +1,9 @@
+    # Trend at the park level.
+    for(t in 1:length(x.hat)) {
+        hat.park.mean[t] <- inprod(hat.strat.mean[t, ], wt[])
+        hat.park.mean.oos[t] <- inprod(hat.strat.mean.oos[t, ], wt[])
+    }
+    trend.park.diff <- hat.park.mean[length(x.hat)] - hat.park.mean[1]
+    trend.park.avg.annual.change <- trend.park.diff / max(x.hat.raw)
+    trend.park.diff.oos <- hat.park.mean.oos[length(x.hat)] - hat.park.mean.oos[1]
+    trend.park.avg.annual.change.oos <- trend.park.diff.oos / max(x.hat.raw)

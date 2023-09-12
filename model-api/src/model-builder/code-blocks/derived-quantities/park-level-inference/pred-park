@@ -1,0 +1,4 @@
+    for(t in 1:n.x.pred) {
+        pred.park.mean[t] <- inprod(pred.strat.mean[t, ], wt[])
+        #pred.park.mean.oos[t] <- inprod(pred.strat.mean.oos[t, ], wt[])
+    }

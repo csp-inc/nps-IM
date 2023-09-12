@@ -1,0 +1,2 @@
+    mu.B0.park <- inprod(mu.B0[], wt[])
+    mu.B1.park <- inprod(mu.B1[], wt[])
