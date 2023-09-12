@@ -1,0 +1,2 @@
+            hat.sigma.tilde[t, k] <- sigma[k]
+            hat.eps.tilde[t, k] ~ dnorm(0, 1 / hat.sigma.tilde[t, k]^2)

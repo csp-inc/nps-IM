@@ -1,0 +1,3 @@
+            hat.sigma.tilde[t, k] ~
+              dgamma(mu.sigma[k]^2 / sigma.sigma[k]^2, mu.sigma[k] / sigma.sigma[k]^2)
+            hat.eps.tilde[t, k] ~ dnorm(0, 1 / hat.sigma.tilde[t, k]^2)

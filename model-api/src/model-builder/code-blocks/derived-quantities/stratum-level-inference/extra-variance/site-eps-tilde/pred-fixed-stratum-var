@@ -1,0 +1,2 @@
+            pred.sigma.tilde[t, k] <- sigma[k]
+            pred.eps.tilde[t, k] ~ dnorm(0, 1 / pred.sigma.tilde[t, k]^2)
