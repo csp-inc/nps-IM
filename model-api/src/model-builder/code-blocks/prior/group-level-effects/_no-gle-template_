@@ -1,0 +1,12 @@
+    ## on intercept parameters for each site within each stratum. Slopes vary by
+    ## stratum.
+    for(k in 1:y.n.strata) {
+        B0[k] ~ dnorm(0, VAGUE_COEF_PRIOR_INTERCEPT)
+        B1[k] ~ dnorm(0, VAGUE_COEF_PRIOR_SLOPE)
+        for(j in 1:y.n.site[k]) {
+            ### Put coefficients into matrix form to make them compatible with
+            ### the multiple slopes model.
+            B[j, 1, k] <- B0[k]
+            B[j, 2, k] <- B1[k]
+        }
+    }

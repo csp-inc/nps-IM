@@ -1,0 +1,19 @@
+    ## on slope and intercept parameters and their covariance matrix for each
+    ## site within each stratum.
+    for(k in 1:y.n.strata) {
+        for(j in 1:y.n.site[k]) {
+            B[j, 1:2, k] ~ dmnorm(B.hat[j, 1:2, k], Tau.B[, 1:2, k])
+            B.hat[j, 1, k] <- mu.B0[k]
+            B.hat[j, 2, k] <- mu.B1[k]
+        }
+        mu.B0[k] ~ dnorm(0, VAGUE_COEF_PRIOR_INTERCEPT)
+        mu.B1[k] ~ dnorm(0, VAGUE_COEF_PRIOR_SLOPE)
+        Tau.B[1:2, 1:2, k] <- inverse(Sigma.B[1:2, 1:2, k])
+        Sigma.B[1, 1, k] <- sigma.B0[k]^2
+        sigma.B0[k] ~ SIGMA_B0_PRIOR
+        Sigma.B[2, 2, k] <- sigma.B1[k]^2
+        sigma.B1[k] ~ SIGMA_B1_PRIOR
+        Sigma.B[1, 2, k] <- rho[k] * sigma.B0[k] * sigma.B1[k]
+        Sigma.B[2, 1, k] <- Sigma.B[1, 2, k]
+        rho[k] ~ dunif(-1, 1)
+    }

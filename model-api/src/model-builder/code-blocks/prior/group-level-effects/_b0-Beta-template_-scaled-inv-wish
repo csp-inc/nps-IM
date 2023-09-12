@@ -1,0 +1,40 @@
+    ## on intercept parameters and other correlated coefficients for each site
+    ## within each stratum. Slopes vary by stratum.
+    for(k in 1:y.n.strata) {
+
+        mu.B0.raw[k] ~ dnorm(0, 1 / 100^2) # VAGUE_COEF_PRIOR_INTERCEPT
+        mu.B0[k] <- xi[1, k] * mu.B0.raw[k]
+        #sigma.B0[k] ~ SIGMA_B0_PRIOR
+        B1[k] ~ dnorm(0, 1 / 100^2) # VAGUE_COEF_PRIOR_SLOPE
+
+        Tau.Beta.raw[1:n.rand.slopes, 1:n.rand.slopes, k] ~ dwish(R.wish[, ], k.wish) # dmvnorm with a Wishart (dwish) prior
+        mu.Beta.raw[1, k] <- mu.B0.raw[k]
+        for (b in 2:n.rand.slopes) {
+          mu.Beta.raw[b, k] ~ dnorm(0, 1 / 100^2) # VAGUE_COEF_PRIOR_SLOPE
+        }
+        Sigma.Beta.raw[1:n.rand.slopes, 1:n.rand.slopes, k] <-
+          inverse(Tau.Beta.raw[1:n.rand.slopes, 1:n.rand.slopes, k])
+        for (b in 1:n.rand.slopes) {
+          mu.Beta[b, k] <- xi[b, k] * mu.Beta.raw[b, k]
+          sigma.Beta[b, k] <- abs(xi[b, k]) * sqrt(Sigma.Beta.raw[b, b, k])
+          xi[b, k] ~ dunif(0, 100)
+          for (b.prime in 1:n.rand.slopes) {
+            rho.Beta[b, b.prime, k] <- Sigma.Beta.raw[b, b.prime, k] /
+              sqrt(Sigma.Beta.raw[b, b, k] * Sigma.Beta.raw[b.prime, b.prime, k])
+          }
+        }
+
+        for(j in 1:y.n.site[k]) {
+            Beta.grp.raw[j, 1:n.rand.slopes, k] ~ dmnorm(mu.Beta.raw[, k], Tau.Beta.raw[, , k])
+            for (b in 1:n.rand.slopes) {
+              Beta.grp[j, b, k] <- xi[b, k] * Beta.grp.raw[j, b, k]
+            }
+            ### Intercepts vary by site and stratum.
+            B0[j, k] <- Beta.grp[j, 1, k]
+            ### Put coefficients into matrix form to make them compatible with
+            ### the multiple slopes model.
+            B[j, 1, k] <- B0[j, k]
+            B[j, 2, k] <- B1[k]
+        }
+
+    }
