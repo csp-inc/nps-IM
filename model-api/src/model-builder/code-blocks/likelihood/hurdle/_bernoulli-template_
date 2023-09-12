@@ -1,0 +1,14 @@
+    # Likelihood for the presence or absence of the response (the 'hurdle').
+    for(n in 1:length(y.bern)) {  # y.bern = 1 if category == 0, 1 otherwise
+        PHI_SWITCH
+        y.bern[n] ~ dbern(phi[n])
+        y.rep.bern[n] ~ dbern(phi[n])
+        deltaF.0[n] <- log(pb_lim[n] * y.bern[n] + (1 - pb_lim[n]) *
+            (1 - y.bern[n]))
+        lp_lim[n] <- min(999, max(-999, phi[n]))
+        pb_lim[n] <- ilogit(lp_lim[n])
+
+        # For all plots.
+        y.hat.bern[n] <- phi[n]
+        epsilon.bern[n] <- y.bern[n] - y.hat.bern[n]
+    }
