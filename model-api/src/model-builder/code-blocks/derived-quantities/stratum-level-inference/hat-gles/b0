@@ -1,0 +1,3 @@
+            hat.strat.HAT_QUANT_SUFFIX.oos[t, k] <- LINK
+                B0.tilde[k] + B1[k] * x.hat[t]
+            )
