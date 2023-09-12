@@ -1,0 +1,4 @@
+        ## Monomolecular (asymptotic) deterministic model.
+        lp[n] <- B[y.site[n], 1, y.strata[n]] +
+            B[y.site[n], 2, y.strata[n]] * x[n]
+        mu[n] <- max(0.00001, maxR * (1 - exp(-lp[n])))

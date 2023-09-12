@@ -1,0 +1,4 @@
+        ## Linear deterministic model.
+        mu[n] <- max(0.00001,
+                     B[y.site[n], 1, y.strata[n]] +
+                     B[y.site[n], 2, y.strata[n]] * x[n]) OFFSET

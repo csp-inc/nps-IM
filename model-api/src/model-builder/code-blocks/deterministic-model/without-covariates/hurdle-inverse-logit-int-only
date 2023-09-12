@@ -1,0 +1,2 @@
+        # Compute phi, the probability of a true 0.
+        phi[n] <- ilogit(G[y.bern.site[n], 1, y.bern.strata[n]])
