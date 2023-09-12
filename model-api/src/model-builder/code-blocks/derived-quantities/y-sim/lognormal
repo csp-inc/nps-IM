@@ -1,0 +1,2 @@
+        TABHOLDER NEW_OBS_PREFIX.site.new.obs[INDICES] ~
+            TABHOLDER dlnorm(NEW_OBS_PREFIX.site.mean.log.y[INDICES], NEW_OBS_PREFIX.site.tau.log.y[INDICES])

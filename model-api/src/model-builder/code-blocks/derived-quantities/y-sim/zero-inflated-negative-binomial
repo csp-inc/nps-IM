@@ -1,0 +1,5 @@
+                #?????
+                #site.p.nb[j, t, k] <-
+                #    kappa[k] / (kappa[k] + hat.site.mean[j, t, k])
+                #hat.site.new.obs[j, t, k] ~
+                #    dnegbin(site.p.nb[j, t, k], kappa[k])

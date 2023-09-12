@@ -1,0 +1,38 @@
+                for(p in 1:2) {
+                    # If p == 1, the expression involving phi.NEW_OBS_PREFIX.site (i.e., 1 - phi.NEW_OBS_PREFIX.site)
+                    # drops out and NEW_OBS_PREFIX.site.mean evaluates to the mean for the
+                    # non-zero cover process. If p == 2, phi.NEW_OBS_PREFIX.site remains in the mix
+                    # and NEW_OBS_PREFIX.site.mean is adjusted such that average cover is
+                    # weighted by the probability that the plants are there at all!
+                    NEW_OBS_PREFIX.site.mean.bb[INDICES, p] <- mu.NEW_OBS_PREFIX.site[INDICES] * (1 - (p - 1) * phi.NEW_OBS_PREFIX.site[INDICES])
+                    NEW_OBS_PREFIX.site.alpha.bb[INDICES, p] <- max(.0001,
+                        (NEW_OBS_PREFIX.site.mean.bb[INDICES, p]^2 - NEW_OBS_PREFIX.site.mean.bb[INDICES, p]^3 -
+                        NEW_OBS_PREFIX.site.mean.bb[INDICES, p] * sigma.ss[SL_IND]^2) /
+                        ifelse(sigma.ss[SL_IND]^2 == 0, 0.01, sigma.ss[SL_IND]^2))
+                    NEW_OBS_PREFIX.site.beta.bb[INDICES, p] <- max(.0001,
+                        (NEW_OBS_PREFIX.site.mean.bb[INDICES, p] - 2 * NEW_OBS_PREFIX.site.mean.bb[INDICES, p]^2 +
+                        NEW_OBS_PREFIX.site.mean.bb[INDICES, p]^3 - sigma.ss[SL_IND]^2 +
+                        NEW_OBS_PREFIX.site.mean.bb[INDICES, p] * sigma.ss[SL_IND]^2) /
+                        ifelse(sigma.ss[SL_IND]^2 == 0, 0.01, sigma.ss[SL_IND]^2))
+                }
+                NEW_OBS_PREFIX.site.mean[INDICES] <- NEW_OBS_PREFIX.site.mean.bb[INDICES, 2]
+                # *.site.new.obs: draws from the beta distribution for total cover (bare ground included)
+                NEW_OBS_PREFIX.site.new.obs[INDICES] ~ dbeta(
+                    NEW_OBS_PREFIX.site.alpha.bb[INDICES, 2], NEW_OBS_PREFIX.site.beta.bb[INDICES, 2])
+                # *.site.gt0.new.obs: draws from the beta distribution for non-zero cover (bare ground not included)
+                NEW_OBS_PREFIX.site.gt0.new.obs[INDICES] ~ dbeta(
+                    NEW_OBS_PREFIX.site.alpha.bb[INDICES, 1], NEW_OBS_PREFIX.site.beta.bb[INDICES, 1])
+
+
+                NEW_OBS_PREFIX.site.pr[INDICES, 1] <- pbeta(lim[1],
+                    NEW_OBS_PREFIX.site.alpha.bb[INDICES, 1], NEW_OBS_PREFIX.site.beta.bb[INDICES, 1])
+                for (l in 2:(nYlevels - 1)) {
+                    NEW_OBS_PREFIX.site.pr[INDICES, l] <- pbeta(lim[l], NEW_OBS_PREFIX.site.alpha.bb[INDICES, 1], NEW_OBS_PREFIX.site.beta.bb[INDICES, 1]) -
+                      pbeta(lim[l - 1], NEW_OBS_PREFIX.site.alpha.bb[INDICES, 1], NEW_OBS_PREFIX.site.beta.bb[INDICES, 1])
+                }
+                NEW_OBS_PREFIX.site.pr[INDICES, nYlevels] <- 1 - pbeta(lim[nYlevels - 1], NEW_OBS_PREFIX.site.alpha.bb[INDICES, 1], NEW_OBS_PREFIX.site.beta.bb[INDICES, 1])
+
+                NEW_OBS_PREFIX.site.class.mean[INDICES] <- inprod(NEW_OBS_PREFIX.site.pr[INDICES, 1:nYlevels], 1:nYlevels)
+                NEW_OBS_PREFIX.site.class.new.obs[INDICES] ~ dcat(NEW_OBS_PREFIX.site.pr[INDICES, 1:nYlevels])
+
+                NEW_OBS_PREFIX.site.class0.new.obs[INDICES] ~ dbern(phi.NEW_OBS_PREFIX.site[INDICES])

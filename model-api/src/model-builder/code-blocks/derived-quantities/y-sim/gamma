@@ -1,0 +1,3 @@
+        #TABHOLDER NEW_OBS_PREFIX.site.new.obs[INDICES] ~
+        #    TABHOLDER dgamma(NEW_OBS_PREFIX.site.mean[INDICES]^2 / sigma.ss[SL_IND]^2, 
+        #    TABHOLDER NEW_OBS_PREFIX.site.mean[INDICES] / sigma.ss[SL_IND]^2)

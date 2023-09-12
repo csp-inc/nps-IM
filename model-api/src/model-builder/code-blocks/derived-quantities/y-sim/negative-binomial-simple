@@ -1,0 +1,4 @@
+        TABHOLDER NEW_OBS_PREFIX.site.p.nb[INDICES] <- kappa[K_IND] /
+            TABHOLDER (kappa[K_IND] + NEW_OBS_PREFIX.site.mean[INDICES])
+        TABHOLDER NEW_OBS_PREFIX.site.new.obs[INDICES] ~
+            TABHOLDER dnegbin(NEW_OBS_PREFIX.site.p.nb[INDICES], kappa[K_IND])

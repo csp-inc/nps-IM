@@ -1,0 +1,17 @@
+        TABHOLDER # Beta-binomial conjugate prior to generate new, predicted observations.
+        TABHOLDER trunc.NEW_OBS_PREFIX.site.mean[INDICES] <-
+            TABHOLDER min(max(NEW_OBS_PREFIX.site.mean[INDICES], .00001), .99999)
+        TABHOLDER NEW_OBS_PREFIX.site.alpha[INDICES] <-
+            TABHOLDER (trunc.NEW_OBS_PREFIX.site.mean[INDICES]^2 - trunc.NEW_OBS_PREFIX.site.mean[INDICES]^3 -
+            TABHOLDER trunc.NEW_OBS_PREFIX.site.mean[INDICES] * sigma.ss[SL_IND]^2) / sigma.ss[SL_IND]^2
+        TABHOLDER NEW_OBS_PREFIX.site.beta[INDICES] <-
+            TABHOLDER (trunc.NEW_OBS_PREFIX.site.mean[INDICES] - 2 * trunc.NEW_OBS_PREFIX.site.mean[INDICES]^2 +
+            TABHOLDER trunc.NEW_OBS_PREFIX.site.mean[INDICES]^3 - sigma.ss[SL_IND]^2 +
+            TABHOLDER trunc.NEW_OBS_PREFIX.site.mean[INDICES] * sigma.ss[SL_IND]^2) / sigma.ss[SL_IND]^2
+        TABHOLDER NEW_OBS_PREFIX.site.p[INDICES] ~ dbeta(
+            TABHOLDER max(.0001, NEW_OBS_PREFIX.site.alpha[INDICES]) , max(.0001, NEW_OBS_PREFIX.site.beta[INDICES]))
+        TABHOLDER NEW_OBS_PREFIX.site.hits[INDICES] ~ dbinom(
+            TABHOLDER NEW_OBS_PREFIX.site.p[INDICES], trials.NEW_OBS_PREFIX[INDICES])
+        TABHOLDER NEW_OBS_PREFIX.site.new.obs[INDICES] ~ dbeta(
+            TABHOLDER NEW_OBS_PREFIX.site.hits[INDICES] + 1,
+            TABHOLDER (trials.NEW_OBS_PREFIX[INDICES] - NEW_OBS_PREFIX.site.hits[INDICES]) + 1)

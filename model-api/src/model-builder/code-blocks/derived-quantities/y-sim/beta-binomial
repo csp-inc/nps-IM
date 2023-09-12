@@ -1,0 +1,6 @@
+        TABHOLDER # Beta-binomial conjugate prior to generate new, predicted observations.
+        TABHOLDER NEW_OBS_PREFIX.site.hits[INDICES] ~ dbinom(
+            TABHOLDER NEW_OBS_PREFIX.site.p[INDICES], trials.NEW_OBS_PREFIX[INDICES])
+        TABHOLDER NEW_OBS_PREFIX.site.new.obs[INDICES] ~ dbeta(
+            TABHOLDER NEW_OBS_PREFIX.site.hits[INDICES] + 1,
+            TABHOLDER (trials.NEW_OBS_PREFIX[INDICES] - NEW_OBS_PREFIX.site.hits[INDICES]) + 1)
