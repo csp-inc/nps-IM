@@ -1,0 +1,2 @@
+        B0.offset.tilde[k] ~ dnorm(0, 1)
+        B0.tilde[k] <- mu.B0[k] + B0.offset.tilde[k] * sigma.B0[k]

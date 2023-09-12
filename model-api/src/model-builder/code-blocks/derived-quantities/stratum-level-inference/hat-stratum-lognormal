@@ -1,0 +1,26 @@
+        for(j in 1:y.n.site[k]) {
+          site.wt[j, k] <- 1
+        }
+        p.site[1:y.n.site[k], k] <-
+            site.wt[1:y.n.site[k], k] / sum(site.wt[1:y.n.site[k], k])
+        j.draw[k] ~ dcat(p.site[1:y.n.site[k], k])
+        BETA_TILDE_DRAW
+        SIGMA_TILDE_DRAW
+        for(t in 1:length(x.hat)) {
+            hat.strat.mean.log.y[t, k] <- log(hat.strat.mean[t, k]) -
+                1/2 * log((sigma.ss[j.draw[k], k]^2 + hat.strat.mean[t, k]^2) / hat.strat.mean[t, k]^2)
+            hat.strat.mean[t, k] <- LINK
+                B[j.draw[k], 1, k] + B[j.draw[k], 2, k] * x.hat[t]
+                )
+            hat.strat.sigma.log.y[t, k] <- sqrt(
+              log((sigma.ss[j.draw[k], k]^2 + hat.strat.mean[t, k]^2) / hat.strat.mean[t, k]^2)
+              )
+            hat.strat.tau.log.y[t, k] <- 1 / hat.strat.sigma.log.y[t, k]^2
+            HAT_STRATUM_ADDITIONAL_QUANTS
+            HAT_STRATUM_EXTRA_VARIANCE_SWITCH
+            HAT_STRATUM_NEW_OBS_SWITCH
+            HAT_STRATUM_OOS_SWITCH
+            #hat.strat.mean.oos[t, k] <- exp(
+            #    hat.strat.mean.log.y.oos[t, k] + sigma.ss[j.draw[k], k]^2/2
+            #)
+        }

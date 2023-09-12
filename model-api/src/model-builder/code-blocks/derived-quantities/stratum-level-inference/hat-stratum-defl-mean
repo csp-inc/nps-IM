@@ -1,0 +1,28 @@
+            for(l in 1:max(y.zone.index)) {
+
+              for(t in 1:n.x.pred) {
+                for(j in 1:tot.site.zone[t, l]) {
+                  site.wt.zone[j, t, l] <- 1
+                }
+                p.site.zone[1:tot.site.zone[t, l], t, l] <- site.wt.zone[1:tot.site.zone[t, l], t, l] /
+                  sum(site.wt.zone[1:tot.site.zone[t, l], t, l])
+                j.draw.zone[l, t] ~ dcat(p.site.zone[1:tot.site.zone[t, l], t, l])
+
+                i.pred.zone[t, l] <- X.pred.zone.lookup[j.draw.zone[l, t], t, l]
+                k.for.j.draw.zone[t, l] <- k.pred[i.pred.zone[t, l]]  # the stratum index for j.draw.zone
+                max.strat.sites[t, l] <- y.n.site[k.for.j.draw.zone[t, l]]
+                hat.zone.HAT_QUANT_SUFFIX[t, l] <- ifelse(j.draw.zone[l, t] <= max.strat.sites[t, l],
+                                               LINK
+                                                 B[min(j.draw.zone[l, t], max.strat.sites[t, l]), 1, k.for.j.draw.zone[t, l]] +
+                                                   B[min(j.draw.zone[l, t], max.strat.sites[t, l]), 2, k.for.j.draw.zone[t, l]] * x.pred[i.pred.zone[t, l]] +
+                                                   D[1, y.zone.index[i.pred.zone[t, l]]]),
+                                               LINK
+                                                 _B0_4_SITE_FROM_ZONE_ k.for.j.draw.zone[t, l]] +
+                                                 _B1_4_SITE_FROM_ZONE_ k.for.j.draw.zone[t, l]] * x.pred[i.pred.zone[t, l]] +
+                                                 D[1, y.zone.index[i.pred.zone[t, l]]]))
+                HAT_ZI_ZONE_QUANTS
+                HAT_PNORM_SWITCH
+                PRED_STRAT_DEFL_MEAN
+                PRED_PNORM_SWITCH
+              }
+            }

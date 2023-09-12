@@ -1,0 +1,41 @@
+        for(j in 1:y.n.site[k]) {
+          site.wt[j, k] <- 1
+        }
+        p.site[1:y.n.site[k], k] <-
+            site.wt[1:y.n.site[k], k] / sum(site.wt[1:y.n.site[k], k])
+        j.draw[k] ~ dcat(p.site[1:y.n.site[k], k])
+        BETA_TILDE_DRAW
+        GAMMA_TILDE_DRAW
+        for(t in 1:length(x.hat)) {
+            phi.hat.strat[t, k] <- ilogit(  # the expected proportion of zeros
+                G[j.draw[k], 1, k] + G[j.draw[k], 2, k] * x.hat[t]
+            )  # answers: how is the proportion of bare ground changing?
+            mu.hat.strat[t, k] <- ilogit(  # the mean of the beta for obs > 0
+                B[j.draw[k], 1, k]
+            )  # given that it's not bare ground, how is cover changing?
+            HAT_STRATUM_OOS_SWITCH
+
+            for(q in 1:2) {
+                this.phi.hat.strat[t, k, q] <- ifelse(q == 1, phi.hat.strat[t, k], phi.hat.strat.oos[t, k])
+                this.mu.hat.strat[t, k, q] <- ifelse(q == 1, mu.hat.strat[t, k], mu.hat.strat.oos[t, k])
+                hat.strat.mean.bb[t, k, q] <- this.mu.hat.strat[t, k, q] * (1 - this.phi.hat.strat[t, k, q])
+                hat.strat.alpha.bb[t, k, q] <- max(.0001,
+                    (hat.strat.mean.bb[t, k, q]^2 - hat.strat.mean.bb[t, k, q]^3 -
+                    hat.strat.mean.bb[t, k, q] * sigma.ss[j.draw[k], k]^2) /
+                    ifelse(sigma.ss[j.draw[k], k]^2 == 0, 0.01, sigma.ss[j.draw[k], k]^2))
+                hat.strat.beta.bb[t, k, q] <- max(.0001,
+                    (hat.strat.mean.bb[t, k, q] - 2 * hat.strat.mean.bb[t, k, q]^2 +
+                    hat.strat.mean.bb[t, k, q]^3 - sigma.ss[j.draw[k], k]^2 +
+                    hat.strat.mean.bb[t, k, q] * sigma.ss[j.draw[k], k]^2) /
+                    ifelse(sigma.ss[j.draw[k], k]^2 == 0, 0.01, sigma.ss[j.draw[k], k]^2))
+            }
+
+            hat.strat.mean[t, k] <- hat.strat.mean.bb[t, k, 1]
+            hat.strat.new.obs[t, k] ~ dbeta(
+                hat.strat.alpha.bb[t, k, 1], hat.strat.beta.bb[t, k, 1])
+
+            hat.strat.mean.oos[t, k] <- hat.strat.mean.bb[t, k, 2]
+            hat.strat.new.obs.oos[t, k] ~ dbeta(
+                hat.strat.alpha.bb[t, k, 2], hat.strat.beta.bb[t, k, 2])
+
+        }

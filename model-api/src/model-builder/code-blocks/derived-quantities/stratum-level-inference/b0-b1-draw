@@ -1,0 +1,1 @@
+        B.tilde[1:2, k] ~ dmnorm(c(mu.B0[k], mu.B1[k]), Tau.B[, , k])

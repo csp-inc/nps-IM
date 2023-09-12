@@ -1,0 +1,2 @@
+        sigma.tilde[k] ~
+          dgamma(mu.sigma[k]^2 / sigma.sigma[k]^2, mu.sigma[k] / sigma.sigma[k]^2)

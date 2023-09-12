@@ -1,0 +1,23 @@
+        for(s in 1:length(X.driver[, 1])) {
+            driver.tau.tilde[s, k] <- ifelse(j.draw[k] <= y.n.site[k],
+                                          tau.site[min(j.draw[k], y.n.site[k]), k],
+                                          1 / sigma.tilde[k]^2)
+            driver.strat.lp[s, k] <- ifelse(j.draw[k] <= y.n.site[k],
+            (
+                B[min(j.draw[k], y.n.site[k]), 1, k] + X.driver[s, ] %*% Beta[which.drivers]
+            ),
+            (
+                DRIVER_STRAT_LIN_PRED
+            ))
+            driver.strat.pr[s, k, 1] <-
+                pnorm(theta[1], driver.strat.lp[s, k] , driver.tau.tilde[s, k])
+            for (m in 2:(nYlevels - 1)) {
+              driver.strat.pr[s, k, m] <-
+                max(0, pnorm(theta[m] , driver.strat.lp[s, k], driver.tau.tilde[s, k]) -
+                    pnorm(theta[m - 1] , driver.strat.lp[s, k] , driver.tau.tilde[s, k]))
+            }
+            driver.strat.pr[s, k, nYlevels] <-
+                1 - pnorm(theta[nYlevels - 1], driver.strat.lp[s, k] , driver.tau.tilde[s, k])
+            mu.driver.strat[s, k] <-
+                inprod(driver.strat.pr[s, k, 1:nYlevels], 1:nYlevels)
+        }

@@ -1,0 +1,9 @@
+        for(s in 1:length(X.driver[, 1])) {
+            phi.driver.strat[s, k] <- ilogit(
+                G[j.draw[k], 1, k] + X.driver[s, ] %*% Gamma
+            )
+            mu.p.driver.strat[s, k] <- ilogit(
+                B[j.draw[k], 1, k]
+            )
+            mu.driver.strat[s, k] <- mu.p.driver.strat[s, k] * (1 - phi.driver.strat[s, k])
+        }

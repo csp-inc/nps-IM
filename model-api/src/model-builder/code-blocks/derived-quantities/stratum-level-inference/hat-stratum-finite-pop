@@ -1,0 +1,23 @@
+        for(j in 1:tot.site[k]) {
+          site.wt[j, k] <- 1
+        }
+        p.site[1:tot.site[k], k] <-  site.wt[1:tot.site[k], k] /
+            sum(site.wt[1:tot.site[k], k])
+        j.draw[k] ~ dcat(p.site[1:tot.site[k], k])
+        BETA_TILDE_DRAW
+        SIGMA_TILDE_DRAW
+        DRIVER_EVAL_SWITCH
+        for(t in 1:length(x.hat)) {
+            hat.strat.HAT_QUANT_SUFFIX[t, k] <- ifelse(j.draw[k] <= y.n.site[k],
+            LINK
+                B[min(j.draw[k], y.n.site[k]), 1, k] +
+                B[min(j.draw[k], y.n.site[k]), 2, k] * x.hat[t]
+                ),
+            LINK
+                HAT_STRAT_LIN_PRED
+                ))
+            HAT_STRATUM_ADDITIONAL_QUANTS
+            HAT_STRATUM_EXTRA_VARIANCE_SWITCH
+            HAT_STRATUM_NEW_OBS_SWITCH
+            HAT_STRATUM_OOS_SWITCH
+        }

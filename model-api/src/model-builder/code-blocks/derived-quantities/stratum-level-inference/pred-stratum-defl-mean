@@ -1,0 +1,13 @@
+
+                pred.zone.HAT_QUANT_SUFFIX[t, l] <- ifelse(j.draw.zone[l, t] <= max.strat.sites[t, l],
+                                               LINK
+                                                 B[min(j.draw.zone[l, t], max.strat.sites[t, l]), 1, k.for.j.draw.zone[t, l]] +
+                                                   B[min(j.draw.zone[l, t], max.strat.sites[t, l]), 2, k.for.j.draw.zone[t, l]] * x.pred[i.pred.zone[t, l]] +
+                                                   D[1, y.zone.index[i.pred.zone[t, l]]] +
+                                                   X.pred[i.pred.zone[t, l], non.defl.idx] %*% Beta[non.defl.idx]),
+                                               LINK
+                                                 _B0_4_SITE_FROM_ZONE_ k.for.j.draw.zone[t, l]] +
+                                                 _B1_4_SITE_FROM_ZONE_ k.for.j.draw.zone[t, l]] * x.pred[i.pred.zone[t, l]] +
+                                                 D[1, y.zone.index[i.pred.zone[t, l]]] +
+                                                 X.pred[i.pred.zone[t, l], non.defl.idx] %*% Beta[non.defl.idx]))
+                 PRED_ZI_ZONE_QUANTS

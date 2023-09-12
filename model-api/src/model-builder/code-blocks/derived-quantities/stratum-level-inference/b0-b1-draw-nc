@@ -1,0 +1,3 @@
+        z.unit.corr.tilde[1:2, k] ~ dmnorm(c(0, 0), Tau.Omega.B[, , k])
+        B.tilde[1, k] <- mu.B0[k] + z.unit.corr.tilde[1, k] * sigma.B0[k]
+        B.tilde[2, k] <- mu.B1[k] + z.unit.corr.tilde[2, k] * sigma.B1[k]

@@ -1,0 +1,10 @@
+        for(t in 1:n.x.pred) {
+            i.pred[t, k] <- X.pred.lookup[j.draw[k], t, k]
+            pred.strat.mean.log.y[t, k] <- log(pred.strat.mean[t, k]) -
+                1/2 * log((sigma.ss[j.draw[k], k]^2 + pred.strat.mean[t, k]^2) / pred.strat.mean[t, k]^2)
+            pred.strat.mean[t, k] <- LINK
+                B[j.draw[k], 1, k] +
+                B[j.draw[k], 2, k] * x.pred[i.pred[t, k]] +
+                X.pred[i.pred[t, k], ] %*% Beta
+                )
+        }

@@ -1,0 +1,9 @@
+        for(s in 1:length(X.driver[, 1])) {
+            mu.driver.strat[s, k] <- ifelse(j.draw[k] <= y.n.site[k],
+            LINK
+                B[min(j.draw[k], y.n.site[k]), 1, k] + X.driver[s, ] %*% Beta[which.drivers]
+            ) * (1 - p.zero[k]),
+            LINK
+                DRIVER_STRAT_LIN_PRED
+            ) * (1 - p.zero[k]))
+        }

@@ -1,0 +1,16 @@
+        for(s in 1:length(X.driver[, 1])) {
+            driver.strat.lp[s, k] <- (
+                B[j.draw[k], 1, k] + X.driver[s, ] %*% Beta[which.drivers]
+                )
+            driver.strat.pr[s, k, 1] <-
+                pnorm(theta[1], driver.strat.lp[s, k] , tau.site[j.draw[k], k])
+            for (m in 2:(nYlevels - 1)) {
+              driver.strat.pr[s, k, m] <-
+                max(0, pnorm(theta[m] , driver.strat.lp[s, k], tau.site[j.draw[k], k]) -
+                    pnorm(theta[m - 1] , driver.strat.lp[s, k] , tau.site[j.draw[k], k]))
+            }
+            driver.strat.pr[s, k, nYlevels] <-
+                1 - pnorm(theta[nYlevels - 1], driver.strat.lp[s, k] , tau.site[j.draw[k], k])
+            mu.driver.strat[s, k] <-
+                inprod(driver.strat.pr[s, k, 1:nYlevels], 1:nYlevels)
+        }

@@ -1,0 +1,16 @@
+        for(t in 1:n.x.pred) {
+            i.pred[t, k] <- X.pred.lookup[j.draw[k], t, k]
+            pred.strat.HAT_QUANT_SUFFIX[t, k] <- ifelse(j.draw[k] <= y.n.site[k],
+                LINK
+                    B[min(j.draw[k], y.n.site[k]), 1, k] +
+                    B[min(j.draw[k], y.n.site[k]), 2, k] * x.pred[i.pred[t, k]] +
+                    X.pred[i.pred[t, k], ] %*% Beta
+                    ),
+                LINK
+                    PRED_STRAT_LIN_PRED +
+                    X.pred[i.pred[t, k], ] %*% Beta
+                    ))
+            PRED_STRATUM_ADDITIONAL_QUANTS
+            PRED_STRATUM_EXTRA_VARIANCE_SWITCH
+            PRED_STRATUM_NEW_OBS_SWITCH
+        }

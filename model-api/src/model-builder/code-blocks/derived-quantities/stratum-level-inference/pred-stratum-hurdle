@@ -1,0 +1,26 @@
+        for(t in 1:n.x.pred) {
+            i.pred[t, k] <- X.pred.lookup[j.draw[k], t, k]
+            phi.pred.strat[t, k] <- ilogit(
+                G[j.draw[k], 1, k] +
+                G[j.draw[k], 2, k] * x.pred[i.pred[t, k]] +
+                X.pred[i.pred[t, k], ] %*% Gamma
+            )
+            mu.pred.strat[t, k] <- ilogit(
+                B[j.draw[k], 1, k] +
+                B[j.draw[k], 2, k] * x.pred[i.pred[t, k]] +
+                X.pred[i.pred[t, k], ] %*% Beta
+            )
+            pred.strat.mean[t, k] <- mu.pred.strat[t, k] * (1 - phi.pred.strat[t, k])
+            pred.strat.alpha[t, k] <- max(.0001,
+                (pred.strat.mean[t, k]^2 - pred.strat.mean[t, k]^3 -
+                pred.strat.mean[t, k] * sigma.ss[j.draw[k], k]^2) /
+                ifelse(sigma.ss[j.draw[k], k]^2 == 0, 0.01, sigma.ss[j.draw[k], k]^2))
+            pred.strat.beta[t, k] <- max(.0001,
+                (pred.strat.mean[t, k] - 2 * pred.strat.mean[t, k]^2 +
+                pred.strat.mean[t, k]^3 - sigma.ss[j.draw[k], k]^2 +
+                pred.strat.mean[t, k] * sigma.ss[j.draw[k], k]^2) /
+                ifelse(sigma.ss[j.draw[k], k]^2 == 0, 0.01, sigma.ss[j.draw[k], k]^2))
+
+            pred.strat.new.obs[t, k] ~ dbeta(
+                pred.strat.alpha[t, k], pred.strat.beta[t, k])
+        }

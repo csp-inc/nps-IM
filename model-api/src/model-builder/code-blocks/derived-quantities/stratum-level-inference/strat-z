@@ -1,0 +1,1 @@
+        strat.z[k] ~ dbern(p.zero[k])

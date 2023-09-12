@@ -1,0 +1,1 @@
+        G.tilde[1:2, k] ~ dmnorm(c(mu.G0[k], mu.G1[k]), Tau.G[, , k])

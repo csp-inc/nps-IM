@@ -1,0 +1,9 @@
+        for(s in 1:length(X.driver[, 1])) {
+            driver.strat.eta[s, k] <- (
+                B[j.draw[k], 1, k] + X.driver[s, ] %*% Beta[which.drivers]
+                )
+            driver.strat.lambda[s, k] <-
+                (1 - delta[k]) * exp(driver.strat.eta[s, k])
+            mu.driver.strat[s, k] <-
+                driver.strat.lambda[s, k] / (1 - delta[k])
+        }

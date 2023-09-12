@@ -1,0 +1,2 @@
+                zone.z[t, l] ~ dbern(p.zero[k.for.j.draw.zone[t, l]])
+                hat.zone.mean[t, l] <- hat.zone.mu.p[t, l] * (1 - zone.z[t, l])

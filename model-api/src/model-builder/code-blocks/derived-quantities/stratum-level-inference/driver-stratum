@@ -1,0 +1,5 @@
+        for(s in 1:length(X.driver[, 1])) {
+            mu.driver.strat[s, k] <- LINK
+                B[j.draw[k], 1, k] + X.driver[s, ] %*% Beta[which.drivers]
+            )
+        }

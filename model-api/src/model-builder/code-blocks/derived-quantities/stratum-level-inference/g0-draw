@@ -1,0 +1,1 @@
+        G0.tilde[k] ~ dnorm(mu.G0[k], tau.G0[k])
