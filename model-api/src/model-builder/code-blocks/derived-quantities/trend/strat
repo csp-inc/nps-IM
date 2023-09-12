@@ -1,0 +1,11 @@
+    for(k in 1:y.n.strata) {
+
+        ## Trend at the stratum level.
+        trend.stratum.diff[k] <-
+            hat.strat.mean[length(x.hat), k] - hat.strat.mean[1, k]
+        trend.stratum.avg.annual.change[k] <- trend.stratum.diff[k] / max(x.hat.raw)
+        trend.stratum.diff.oos[k] <-
+            hat.strat.mean.oos[length(x.hat), k] - hat.strat.mean.oos[1, k]
+        trend.stratum.avg.annual.change.oos[k] <- trend.stratum.diff.oos[k] / max(x.hat.raw)
+
+    }

@@ -1,0 +1,8 @@
+        for(l in 1:max(y.zone.index)) {
+
+            ## Trend at the zone level.
+            trend.zone.diff[l] <-
+                hat.zone.mean[n.x.pred, l] - hat.zone.mean[1, l]
+            trend.zone.avg.annual.change[l] <- trend.zone.diff[l] / (n.x.pred - 1)
+
+        }
