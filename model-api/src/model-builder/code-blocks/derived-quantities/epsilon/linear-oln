@@ -1,0 +1,2 @@
+        y.hat[n] <- inprod(pr[n, 1:nYlevels] , 1:nYlevels)  # It would be interesting to see if y.hat[n] is the same as mu[n].  I think it will be!
+        epsilon[n] <- y[n] - y.hat[n]

@@ -1,0 +1,2 @@
+        y.hat[n] <- (p[n] * (1 - z[n])) * y.n[n]
+        epsilon[n] <- y[n] - y.hat[n]

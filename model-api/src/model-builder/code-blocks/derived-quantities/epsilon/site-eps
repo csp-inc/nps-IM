@@ -1,0 +1,1 @@
+            site.eps[j, k] ~ dnorm(0, pow(sigma.ss[j, k], -2))
