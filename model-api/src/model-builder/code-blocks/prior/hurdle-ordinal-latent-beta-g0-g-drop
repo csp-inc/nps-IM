@@ -1,0 +1,12 @@
+    ## on the coefficients for the likelihood associated with the hurdle.
+    for(k in 1:y.n.strata) {
+        mu.G0[k] ~ dnorm(0, pow(1.5, -2))  # flat prior on proportion
+        sigma.G0[k] ~ dgamma(0.01, 0.01)
+        tau.G0[k] <- 1 / max(1E-12, sigma.G0[k]^2)
+        VARIANCES_SPEC_HYPERS_SWITCH
+        for(j in 1:y.n.site[k]) {
+            G0[j, k] ~ dnorm(mu.G0[k], tau.G0[k])
+            G[j, 1, k] <- G0[j, k]
+            VARIANCES_SPEC_SWITCH
+        }
+    }

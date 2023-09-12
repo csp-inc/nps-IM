@@ -1,0 +1,6 @@
+    ## on `kappa`, `p.zero`, and `tau.epsilon` for each stratum.
+    for(k in 1:y.n.strata) {
+        kappa[k] ~ dunif(0, 10000)
+        p.zero[k] ~ dunif(0, 1)
+    }
+    tau.epsilon <- 1

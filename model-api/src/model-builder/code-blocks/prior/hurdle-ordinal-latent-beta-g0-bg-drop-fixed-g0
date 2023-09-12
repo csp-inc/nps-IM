@@ -1,0 +1,10 @@
+    ## on the coefficients for the likelihood associated with the hurdle.
+    for(k in 1:y.n.strata) {
+        mu.G0[k] ~ dnorm(0, 1 / 1.5^2)
+        VARIANCES_SPEC_HYPERS_SWITCH
+        for(j in 1:y.n.site[k]) {
+            G0[j, k] <- mu.G0[k]
+            G[j, 1, k] <- G0[j, k]
+            VARIANCES_SPEC_SWITCH
+        }
+    }

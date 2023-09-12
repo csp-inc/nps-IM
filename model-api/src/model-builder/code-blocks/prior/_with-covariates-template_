@@ -1,0 +1,4 @@
+    ## on the coefficients for each covariate.
+    for(m in 1:length(X[1, ])) {
+        Beta[m] ~ dnorm(0, VAGUE_COEF_PRIOR_SLOPE)
+    }

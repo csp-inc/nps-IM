@@ -1,0 +1,4 @@
+    ## on the coefficients for each covariate.
+    for(q in 1:length(X[1, ])) {
+        Gamma[q] ~ dnorm(0, pow(1.5, -2))
+    }

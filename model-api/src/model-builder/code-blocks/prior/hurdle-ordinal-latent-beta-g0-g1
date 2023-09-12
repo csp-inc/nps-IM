@@ -1,0 +1,21 @@
+    ## on slope and intercept parameters and their covariance matrix for each
+    ## site within each stratum.
+    for(k in 1:y.n.strata) {
+        VARIANCES_SPEC_HYPERS_SWITCH
+        for(j in 1:y.n.site[k]) {
+            G[j, 1:2, k] ~ dmnorm(G.hat[j, 1:2, k], Tau.G[, 1:2, k])
+            G.hat[j, 1, k] <- mu.G0[k]
+            G.hat[j, 2, k] <- mu.G1[k]
+            VARIANCES_SPEC_SWITCH
+        }
+        mu.G0[k] ~ dnorm(0, pow(1.5, -2))
+        mu.G1[k] ~ dnorm(0, pow(1.5, -2))
+        Tau.G[1:2, 1:2, k] <- inverse(Sigma.G[1:2, 1:2, k])
+        Sigma.G[1, 1, k] <- sigma.G0[k]^2
+        sigma.G0[k] ~ dgamma(0.01, 0.01)
+        Sigma.G[2, 2, k] <- sigma.G1[k]^2
+        sigma.G1[k] ~ dgamma(0.01, 0.01)
+        Sigma.G[1, 2, k] <- rho.G[k] * sigma.G0[k] * sigma.G1[k]
+        Sigma.G[2, 1, k] <- Sigma.G[1, 2, k]
+        rho.G[k] ~ dunif(-1, 1)
+    }

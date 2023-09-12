@@ -1,0 +1,2 @@
+    ## max `response` for asymptotic functions.
+    maxR ~ dunif(0, 100)

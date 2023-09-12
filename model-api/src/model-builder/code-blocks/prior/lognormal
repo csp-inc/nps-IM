@@ -1,0 +1,7 @@
+    ### on sigma for each site and/or stratum.
+    for(k in 1:y.n.strata) {
+        for(j in 1:y.n.site[k]) {
+            VARIANCES_SPEC_SWITCH
+        }
+        VARIANCES_SPEC_HYPERS_SWITCH
+    }

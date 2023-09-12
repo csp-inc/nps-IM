@@ -1,0 +1,4 @@
+    ## on kappa for each stratum.
+    for(k in 1:y.n.strata) {
+        kappa[k] ~ dunif(0, 10000)
+    }

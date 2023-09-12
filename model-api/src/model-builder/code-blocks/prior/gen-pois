@@ -1,0 +1,5 @@
+    # Prior for delta parameter of GP distribution.
+    for(k in 1:y.n.strata) {
+        delta[k] ~ dunif(-1, 1)
+    }
+    C <- 10000

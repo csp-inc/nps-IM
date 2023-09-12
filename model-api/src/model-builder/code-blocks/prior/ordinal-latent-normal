@@ -1,0 +1,12 @@
+    for(k in 1:y.n.strata) {
+        VARIANCES_SPEC_HYPERS_SWITCH
+        # This code allows for site- or strata-level variances: .01 is rate and
+        # shape parameter in flat gamma.
+        for(j in 1:y.n.site[k]) {
+            VARIANCES_SPEC_SWITCH
+        }
+    }
+    # Priors on cutpoints, 1 and nYlevels-1 are fixed (Kruschke 2nd ed., pg. 688)
+    for(k in 2:(nYlevels - 2)) {
+        theta[k] ~  dnorm(k + .05, 1/2^2)
+    }
