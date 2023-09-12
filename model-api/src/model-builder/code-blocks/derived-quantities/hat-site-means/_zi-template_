@@ -1,0 +1,4 @@
+                hat.site.mu.p[j, t, k] <- LINK
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t]
+                    )
+                hat.site.mean[j, t, k] <- hat.site.mu.p[j, t, k] * (1 - site.z[j, k])

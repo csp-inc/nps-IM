@@ -1,0 +1,9 @@
+                hat.site.mean.log.y[j, t, k] <- log(hat.site.mean[j, t, k]) -
+                  1/2 * log((sigma.ss[j, k]^2 + hat.site.mean[j, t, k]^2) / hat.site.mean[j, t, k]^2)
+                hat.site.mean[j, t, k] <- LINK
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t]
+                    )
+                hat.site.sigma.log.y[j, t, k] <- sqrt(
+                  log((sigma.ss[j, k]^2 + hat.site.mean[j, t, k]^2) / hat.site.mean[j, t, k]^2)
+                  )
+                hat.site.tau.log.y[j, t, k] <- 1 / hat.site.sigma.log.y[j, t, k]^2

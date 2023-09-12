@@ -1,0 +1,1 @@
+            tau.site[j, k] <- 1 / sigma.ss[j, k]^2

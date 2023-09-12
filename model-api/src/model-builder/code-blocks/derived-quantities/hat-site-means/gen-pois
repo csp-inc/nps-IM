@@ -1,0 +1,4 @@
+                hat.site.eta[j, t, k] <- B[j, 1, k] + B[j, 2, k] * x.hat[t]
+                hat.site.lambda[j, t, k] <-
+                    (1 - delta[k]) * exp(hat.site.eta[j, t, k])
+                hat.site.mean[j, t, k] <- hat.site.lambda[j, t, k] / (1 - delta[k])

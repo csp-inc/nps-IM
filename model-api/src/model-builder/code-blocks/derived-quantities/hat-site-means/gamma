@@ -1,0 +1,2 @@
+                hat.site.mean[j, t, k] <- max(0.00001,
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t])

@@ -1,0 +1,14 @@
+                hat.site.mu[j, t, k] <- B[j, 1, k] + B[j, 2, k] * x.hat[t]
+
+                hat.site.pr[j, t, k, 1] <-
+                    pnorm(theta[1], hat.site.mu[j, t, k] , tau.site[j, k])
+                for (m in 2:(nYlevels - 1)) {
+                  hat.site.pr[j, t, k, m] <-
+                    max(0, pnorm(theta[m] , hat.site.mu[j, t, k], tau.site[j, k]) -
+                        pnorm(theta[m - 1] , hat.site.mu[j, t, k] , tau.site[j, k]))
+                }
+                hat.site.pr[j, t, k, nYlevels] <-
+                    1 - pnorm(theta[nYlevels - 1], hat.site.mu[j, t, k] , tau.site[j, k])
+
+                hat.site.mean[j, t, k] <-
+                    inprod(hat.site.pr[j, t, k, 1:nYlevels], 1:nYlevels)  # same as hat.site.mu[j, t, k]?

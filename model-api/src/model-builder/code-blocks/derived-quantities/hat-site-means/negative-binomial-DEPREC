@@ -1,0 +1,4 @@
+                hat.site.sigma.y[j, t, k] <- sigma.ss[j, k]
+                hat.site.mean[j, t, k] <- LINK
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t]
+                    )

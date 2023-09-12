@@ -1,0 +1,6 @@
+                phi.hat.site[j, t, k] <- ilogit(  # the expected proportion of zeros
+                    G[j, 1, k]
+                    )  # answers: how is the proportion of bare ground changing?
+                mu.hat.site[j, t, k] <- ilogit(  # the mean of the beta for obs > 0
+                    B[j, 1, k]
+                    )  # given that it's not bare ground, how is cover changing?

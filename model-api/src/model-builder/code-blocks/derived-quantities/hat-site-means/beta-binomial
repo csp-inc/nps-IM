@@ -1,0 +1,6 @@
+                hat.site.mean[j, t, k] <- ilogit(
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t]
+                    )
+                hat.site.p[j, t, k] <- ilogit(
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t] + site.eps[j, k]
+                    )

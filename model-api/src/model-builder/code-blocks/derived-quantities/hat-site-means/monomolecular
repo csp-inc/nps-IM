@@ -1,0 +1,5 @@
+                hat.site.lp[j, t, k] <- LINK
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t]
+                    )
+                hat.site.mean[j, t, k] <-
+                    max(0.00001, maxR * (1 - exp(-hat.site.lp[j, t, k])))

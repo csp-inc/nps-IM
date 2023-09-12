@@ -1,0 +1,4 @@
+                HAT_SITE_VARIANCE_SWITCH
+                hat.site.mean[j, t, k] <- LINK
+                    B[j, 1, k] + B[j, 2, k] * x.hat[t]
+                    )
