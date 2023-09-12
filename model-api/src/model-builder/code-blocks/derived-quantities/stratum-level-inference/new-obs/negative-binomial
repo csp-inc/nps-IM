@@ -1,0 +1,7 @@
+            NEW_OBS_PREFIX.strat.p.nb[t, k] <- NEW_OBS_PREFIX.strat.kappa[t, k] /
+                (NEW_OBS_PREFIX.strat.kappa[t, k] + NEW_OBS_PREFIX.strat.mean[t, k])
+            NEW_OBS_PREFIX.strat.kappa[t, k] <- NEW_OBS_PREFIX.strat.mean[t, k]^2 /
+                max(1E-12, NEW_OBS_PREFIX.strat.sigma.y[t, k]^2 - NEW_OBS_PREFIX.strat.mean[t, k])
+            NEW_OBS_PREFIX.strat.sigma.y[t, k] <- sigma.ss[j.draw[k], k]
+            NEW_OBS_PREFIX.strat.new.obs[t, k] ~
+                dnegbin(NEW_OBS_PREFIX.strat.p.nb[t, k], kappa[k])

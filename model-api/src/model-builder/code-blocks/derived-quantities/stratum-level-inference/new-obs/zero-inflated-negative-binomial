@@ -1,0 +1,8 @@
+        # TODO!
+        ## Zero-inflated negative binomial likelihood.
+        #z[n] ~ dbern(p.zero[y.strata[n]])
+        #p.nb[n] <- kappa[y.strata[n]] /
+        #    (kappa[y.strata[n]] + mu[n] * (1 - z[n]))
+        #sigma[n] <- sqrt(p.nb[n] * kappa[y.strata[n]] / (1 + p.nb[n]))
+        #y[n] ~ dnegbin(p.nb[n] - .0001, kappa[y.strata[n]])
+        #epsilon[n] ~ dnorm(0, tau.epsilon)

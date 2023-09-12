@@ -1,0 +1,1 @@
+            NEW_OBS_PREFIX.strat.new.obs[t, k] ~ dpois(NEW_OBS_PREFIX.strat.mean[t, k])

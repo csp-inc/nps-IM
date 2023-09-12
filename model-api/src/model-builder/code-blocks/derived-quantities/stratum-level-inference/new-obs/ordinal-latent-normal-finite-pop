@@ -1,0 +1,14 @@
+            NEW_OBS_PREFIX.tau.tilde[t, k] <- ifelse(j.draw[k] <= y.n.site[k],
+                                      tau.site[min(j.draw[k], y.n.site[k]), k],
+                                      1 / sigma.tilde[k]^2)
+            NEW_OBS_PREFIX.strat.pr[t, k, 1] <-
+                pnorm(theta[1], NEW_OBS_PREFIX.strat.mu[t, k] , NEW_OBS_PREFIX.tau.tilde[t, k])
+            for (m in 2:(nYlevels - 1)) {
+              NEW_OBS_PREFIX.strat.pr[t, k, m] <-
+                max(0, pnorm(theta[m] , NEW_OBS_PREFIX.strat.mu[t, k], NEW_OBS_PREFIX.tau.tilde[t, k]) -
+                    pnorm(theta[m - 1] , NEW_OBS_PREFIX.strat.mu[t, k], NEW_OBS_PREFIX.tau.tilde[t, k]))
+            }
+            NEW_OBS_PREFIX.strat.pr[t, k, nYlevels] <-
+                1 - pnorm(theta[nYlevels - 1], NEW_OBS_PREFIX.strat.mu[t, k], NEW_OBS_PREFIX.tau.tilde[t, k])
+            NEW_OBS_PREFIX.strat.mean[t, k] <-
+                inprod(NEW_OBS_PREFIX.strat.pr[t, k, 1:nYlevels], 1:nYlevels)

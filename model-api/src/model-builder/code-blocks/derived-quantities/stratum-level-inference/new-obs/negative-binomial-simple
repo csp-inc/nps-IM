@@ -1,0 +1,4 @@
+            NEW_OBS_PREFIX.strat.p.nb[t, k] <- kappa[k] /
+                (kappa[k] + NEW_OBS_PREFIX.strat.mean[t, k])
+            NEW_OBS_PREFIX.strat.new.obs[t, k] ~
+                dnegbin(NEW_OBS_PREFIX.strat.p.nb[t, k], kappa[k])

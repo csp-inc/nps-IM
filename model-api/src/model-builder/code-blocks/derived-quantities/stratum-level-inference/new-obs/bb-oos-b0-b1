@@ -1,0 +1,3 @@
+            hat.strat.p.oos[t, k] <- ilogit(
+                B.tilde[1, k] + B.tilde[2, k] * x.hat[t] + hat.eps.tilde[t, k]
+            )

@@ -1,0 +1,5 @@
+            NEW_OBS_PREFIX.strat.hits[t, k] ~ dbinom(
+                NEW_OBS_PREFIX.strat.mean[t, k], trials.NEW_OBS_PREFIX[j.draw[k], t, k])
+            NEW_OBS_PREFIX.strat.new.obs[t, k] ~ dbeta(
+                NEW_OBS_PREFIX.strat.hits[t, k] + 1,
+                (trials.NEW_OBS_PREFIX[j.draw[k], t, k] - NEW_OBS_PREFIX.strat.hits[t, k]) + 1)

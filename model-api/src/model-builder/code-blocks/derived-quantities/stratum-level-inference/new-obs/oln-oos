@@ -1,0 +1,13 @@
+            # temporarily disabled
+            hat.strat.pr.oos[t, k, 1] <-
+                pnorm(theta[1], hat.strat.mu.oos[t, k] , tau.site[j.draw[k], k])
+            for (m in 2:(nYlevels - 1)) {
+              hat.strat.pr.oos[t, k, m] <-
+                max(0, pnorm(theta[m] , hat.strat.mu.oos[t, k], tau.site[j.draw[k], k]) -
+                    pnorm(theta[m - 1] , hat.strat.mu.oos[t, k] , tau.site[j.draw[k], k]))
+            }
+            hat.strat.pr.oos[t, k, nYlevels] <-
+                1 - pnorm(theta[nYlevels - 1], hat.strat.mu.oos[t, k] , tau.site[j.draw[k], k])
+
+            hat.strat.mean.oos[t, k] <-
+                inprod(hat.strat.pr.oos[t, k, 1:nYlevels], 1:nYlevels)

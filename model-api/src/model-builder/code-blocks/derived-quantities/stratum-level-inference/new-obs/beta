@@ -1,0 +1,11 @@
+            NEW_OBS_PREFIX.strat.alpha[t, k] <-
+                (NEW_OBS_PREFIX.strat.mean[t, k]^2 - NEW_OBS_PREFIX.strat.mean[t, k]^3 -
+                NEW_OBS_PREFIX.strat.mean[t, k] * sigma.ss[j.draw[k], k]^2) /
+                ifelse(sigma.ss[j.draw[k], k]^2 == 0, 0.01, sigma.ss[j.draw[k], k]^2)
+            NEW_OBS_PREFIX.strat.beta[t, k] <-
+                (NEW_OBS_PREFIX.strat.mean[t, k] - 2 * NEW_OBS_PREFIX.strat.mean[t, k]^2 +
+                NEW_OBS_PREFIX.strat.mean[t, k]^3 - sigma.ss[j.draw[k], k]^2 +
+                NEW_OBS_PREFIX.strat.mean[t, k] * sigma.ss[j.draw[k], k]^2) /
+                ifelse(sigma.ss[j.draw[k], k]^2 == 0, 0.01, sigma.ss[j.draw[k], k]^2)
+            NEW_OBS_PREFIX.strat.new.obs[t, k] ~ dbeta(
+                max(.0001, NEW_OBS_PREFIX.strat.alpha[t, k]) , max(.0001, NEW_OBS_PREFIX.strat.beta[t, k]))

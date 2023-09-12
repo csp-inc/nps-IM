@@ -1,0 +1,2 @@
+            NEW_OBS_PREFIX.strat.new.obs[t, k] ~
+              dlnorm(NEW_OBS_PREFIX.strat.mean.log.y[t, k], NEW_OBS_PREFIX.strat.tau.log.y[t, k])
