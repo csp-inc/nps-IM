@@ -1,0 +1,4 @@
+        tau.ss[n] <- 1 / sigma.ss[y.site[n], y.strata[n]]^2
+        eps[n] ~ dnorm(0, tau.ss[n])
+        p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
+                         B[y.site[n], 2, y.strata[n]] * x[n] + eps[n])
