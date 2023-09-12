@@ -1,0 +1,26 @@
+    for(i in PRED_SITE_IDX) {
+        pred.site.mu[j.pred[i], x.pred.index[i], k.pred[i]] <-
+          B[j.pred[i], 1, k.pred[i]] + B[j.pred[i], 2, k.pred[i]] * x.pred[i] +
+          X.pred[i, ] %*% Beta
+
+        pred.site.pr[j.pred[i], x.pred.index[i], k.pred[i], 1] <-
+            pnorm(theta[1], pred.site.mu[j.pred[i], x.pred.index[i], k.pred[i]] ,
+            tau.site[j.pred[i], k.pred[i]])
+        for (m in 2:(nYlevels - 1)) {
+          pred.site.pr[j.pred[i], x.pred.index[i], k.pred[i], m] <-
+            max(0,
+                pnorm(theta[m] , pred.site.mu[j.pred[i], x.pred.index[i], k.pred[i]],
+                      tau.site[j.pred[i], k.pred[i]]) -
+                  pnorm(theta[m - 1] , pred.site.mu[j.pred[i], x.pred.index[i], k.pred[i]],
+                        tau.site[j.pred[i], k.pred[i]]))
+        }
+        pred.site.pr[j.pred[i], x.pred.index[i], k.pred[i], nYlevels] <-
+            1 - pnorm(theta[nYlevels - 1], pred.site.mu[j.pred[i], x.pred.index[i], k.pred[i]],
+                      tau.site[j.pred[i], k.pred[i]])
+
+        pred.site.mean[j.pred[i], x.pred.index[i], k.pred[i]] <-
+            inprod(pred.site.pr[j.pred[i], x.pred.index[i], k.pred[i], 1:nYlevels], 1:nYlevels)
+
+        PRED_SITE_NEW_OBS_SWITCH
+        PRED_SITE_OOS_SWITCH
+    }

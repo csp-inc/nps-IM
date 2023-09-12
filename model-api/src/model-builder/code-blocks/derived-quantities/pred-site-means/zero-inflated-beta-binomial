@@ -1,0 +1,20 @@
+    for(i in PRED_SITE_IDX) {
+        ## Site-level predictions at observed levels of any covariates.
+        pred.site.mu.p[j.pred[i], x.pred.index[i], k.pred[i]] <- LINK
+            B[j.pred[i], 1, k.pred[i]] +
+            B[j.pred[i], 2, k.pred[i]] * x.pred[i] +
+            X.pred[i, ] %*% Beta
+        )
+        pred.site.mean[j.pred[i], x.pred.index[i], k.pred[i]] <-
+            pred.site.mu.p[j.pred[i], x.pred.index[i], k.pred[i]] * (1 - site.z[j.pred[i], k.pred[i]])
+        pred.site.p[j.pred[i], x.pred.index[i], k.pred[i]] <- ilogit(
+            B[j.pred[i], 1, k.pred[i]] +
+            B[j.pred[i], 2, k.pred[i]] * x.pred[i] +
+            X.pred[i, ] %*% Beta +
+            site.eps[j.pred[i], k.pred[i]]
+        )
+        pred.site.mean.extra[j.pred[i], x.pred.index[i], k.pred[i]] <-
+            pred.site.p[j.pred[i], x.pred.index[i], k.pred[i]] * (1 - site.z[j.pred[i], k.pred[i]])
+        PRED_SITE_NEW_OBS_SWITCH
+        PRED_SITE_OOS_SWITCH
+    }

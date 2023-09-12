@@ -1,0 +1,12 @@
+    for(i in PRED_SITE_IDX) {
+        ## Site-level predictions at observed levels of any covariates.
+        pred.site.lp[j.pred[i], x.pred.index[i], k.pred[i]] <- LINK
+                B[j.pred[i], 1, k.pred[i]] +
+                B[j.pred[i], 2, k.pred[i]] * x.pred[i] +
+                X.pred[i, ] %*% Beta
+            )
+        pred.site.mean[j.pred[i], x.pred.index[i], k.pred[i]] <-
+            max(0.00001, maxR * (1 - exp(-pred.site.lp[j.pred[i], x.pred.index[i], k.pred[i]])))
+        PRED_SITE_NEW_OBS_SWITCH
+        PRED_SITE_OOS_SWITCH
+    }

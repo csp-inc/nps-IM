@@ -1,0 +1,10 @@
+    for(i in PRED_SITE_IDX) {
+        pred.site.eta[j.pred[i], x.pred.index[i], k.pred[i]] <-
+          B[j.pred[i], 1, k.pred[i]] + B[j.pred[i], 2, k.pred[i]] * x.pred[i] +
+          X.pred[i, ] %*% Beta
+        pred.site.lambda[j.pred[i], x.pred.index[i], k.pred[i]] <-
+            (1 - delta[k.pred[i]]) * exp(pred.site.eta[j.pred[i], x.pred.index[i], k.pred[i]])
+        pred.site.mean[j.pred[i], x.pred.index[i], k.pred[i]] <-
+            pred.site.lambda[j.pred[i], x.pred.index[i], k.pred[i]] / (1 - delta[k.pred[i]])
+        PRED_SITE_OOS_SWITCH
+    }

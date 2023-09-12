@@ -1,0 +1,19 @@
+    for(i in PRED_SITE_IDX) {
+        ## Site-level predictions at observed levels of any covariates.
+        phi.pred.site[j.pred[i], x.pred.index[i], k.pred[i]] <- ilogit(
+            G[j.pred[i], 1, k.pred[i]]
+          )
+        mu.pred.site[j.pred[i], x.pred.index[i], k.pred[i]] <- ilogit(
+            B[j.pred[i], 1, k.pred[i]]
+          )
+
+    PRED_SITE_NEW_OBS_SWITCH
+    PRED_SITE_OOS_SWITCH
+    pred.site.mean.oos[j.pred[i], x.pred.index[i], k.pred[i]] <-
+        mu.pred.site.oos[j.pred[i], x.pred.index[i], k.pred[i]] *
+            (1 - phi.pred.site.oos[j.pred[i], x.pred.index[i], k.pred[i]])
+    pred.site.mean.01.oos[j.pred[i], x.pred.index[i], k.pred[i]] <-
+        mean(phi.pred.site.oos[j.pred[i], x.pred.index[i], k.pred[i]])
+    pred.site.mean.gt0.oos[j.pred[i], x.pred.index[i], k.pred[i]] <-
+        mean(mu.pred.site.oos[j.pred[i], x.pred.index[i], k.pred[i]])
+    }
