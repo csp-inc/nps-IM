@@ -1,0 +1,5 @@
+    for(n in 1:length(y)) {
+        ## Random number generation for the Poisson distribution with parameter
+        ## `mu`.
+        y.rep[n] ~ dpois(mu[n])
+    }

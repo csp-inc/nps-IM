@@ -1,0 +1,5 @@
+    for(n in 1:length(y)) {
+        ## Random number generation for a zero-inflated negative binomial
+        ## distribution with parameters `p.nb` and `kappa`.
+        y.rep[n] ~ dpois(mu[n] * (1 - z[n]))
+    }

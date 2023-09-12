@@ -1,0 +1,3 @@
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(Y_VEC_SWITCH[]))
+    p.mean <- step(mean(y.rep[]) - mean(Y_VEC_SWITCH[]))

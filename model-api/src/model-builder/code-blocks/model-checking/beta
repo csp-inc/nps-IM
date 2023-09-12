@@ -1,0 +1,5 @@
+    for(n in 1:length(y)) {
+        ## Random number generation for the beta distribution with parameters
+        ## `alpha` and `beta`.
+        y.rep[n] ~ dbeta(alpha[n] + .0001, beta[n] + .0001)
+    }

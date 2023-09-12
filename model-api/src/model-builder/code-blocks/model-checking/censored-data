@@ -1,0 +1,2 @@
+        #is.censored.rep[n] ~ dinterval(y.rep[n], censor.limit.vec[n])
+        y.rep.cond[n] <- min(censor.limit.vec.rep[n], y.rep[n])

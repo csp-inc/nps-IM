@@ -1,0 +1,13 @@
+    ## Deviance.
+    llike <- sum(pllike.0)
+    dev.Beta <- -2 * llike
+
+    dev.0 <- -2 * sum(deltaF.0)
+
+    ## Posterior predictive checks for category data.
+    p.sd <- step(sd(y.rep.beta[]) - sd(y.beta[]))
+    p.mean <- step(mean(y.rep.beta[]) - mean(y.beta[]))
+
+    ## Posterior predictive checks for 0-1 data.
+    p.bern.mean <- step(mean(y.rep.bern[]) - mean(y.bern[]))
+    p.bern.sd <- step(sd(y.rep.bern[]) - sd(y.bern[]))

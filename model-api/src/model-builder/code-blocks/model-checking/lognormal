@@ -1,0 +1,6 @@
+    for(n in 1:length(y)) {
+        ## Random number generation for the lognormal distribution with
+        ## centrality and scale parameters.
+        y.rep[n] ~ dlnorm(mu.log.y[n], tau.log.y[n]) TRUNCATION_SWITCH
+        CENSOR_SWITCH_CHECKING
+    }

@@ -1,0 +1,5 @@
+    for(n in 1:length(y)) {
+        ## Random number generation for the beta binomial model with parameter
+        ## `p` and number of trials `y.n`.
+        y.rep[n] ~ dbinom(p[n], y.n[n])
+    }

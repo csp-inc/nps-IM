@@ -1,0 +1,6 @@
+    for(n in 1:length(y)) {
+        ## Random number generation for the gamma distribution with
+        ## moment-matched shape and rate parameters.
+        y.rep[n] ~ dgamma(mu[n]^2 / sigma.y[n]^2, mu[n] / sigma.y[n]^2) TRUNCATION_SWITCH
+        CENSOR_SWITCH_CHECKING
+    }

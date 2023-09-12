@@ -1,0 +1,5 @@
+    for(n in 1:length(y)) {
+        ## Random number generation for the negative binomial distribution with
+        ## parameters `p.nb` and `kappa`.
+        y.rep[n] ~ dnegbin(p.nb[n], kappa[n])
+    }
