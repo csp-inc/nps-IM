@@ -1,0 +1,9 @@
+        ## Negative binomial likelihood.
+        p.nb[n] <- kappa[n] / (kappa[n] + mu[n])
+        # https://www.mathpapa.com/algebra-calculator.html?q=v%3Dr*(1-p)%2F(p*p)
+        # http://doingbayesiandataanalysis.blogspot.com/2012/04/negative-binomial-reparameterization.html
+        # r <- (p^2 * v^2) / (-p + 1)
+        #kappa[n] <- (p.nb[n]^2 * sigma.y[n]^2) / (-p.nb[n] + 1)
+        kappa[n] <- mu[n]^2 / max(1E-12, sigma.y[n]^2 - mu[n])
+        sigma.y[n] <- sigma.ss[y.site[n], y.strata[n]]
+        y[n] ~ dnegbin(p.nb[n], kappa[n])

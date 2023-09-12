@@ -1,0 +1,2 @@
+        ## Poisson likelihood.
+        y[n] ~ dpois(mu[n])

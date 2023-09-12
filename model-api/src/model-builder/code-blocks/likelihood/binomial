@@ -1,0 +1,3 @@
+        ## Binomial likelihood.
+        p[n] <- mu.p[n]
+        y[n] ~ dbinom(p[n], y.n[n])

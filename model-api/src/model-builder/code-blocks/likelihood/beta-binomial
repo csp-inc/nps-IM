@@ -1,0 +1,3 @@
+        ## Beta-binomial likelihood.
+        EXTRA_VARIANCE_SWITCH
+        y[n] ~ dbinom(p[n], y.n[n])

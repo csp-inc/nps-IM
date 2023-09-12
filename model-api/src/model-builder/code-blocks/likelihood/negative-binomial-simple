@@ -1,0 +1,4 @@
+        ## Negative binomial likelihood.
+        p.nb[n] <- kappa[y.strata[n]] / (kappa[y.strata[n]] + mu[n])
+        sigma[n] <- sqrt(p.nb[n] * kappa[y.strata[n]] / (1 + p.nb[n]))
+        y[n] ~ dnegbin(p.nb[n], kappa[y.strata[n]])

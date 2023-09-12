@@ -1,0 +1,1 @@
+        is.censored[n] ~ dinterval(y[n], censor.limit.vec[n])

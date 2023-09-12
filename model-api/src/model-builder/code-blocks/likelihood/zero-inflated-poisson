@@ -1,0 +1,3 @@
+        ## Zero-inflated Poisson likelihood.
+        y[n] ~ dpois(mu[n] * (1 - z[n]))
+        z[n] ~ dbern(p.zero[y.strata[n]])

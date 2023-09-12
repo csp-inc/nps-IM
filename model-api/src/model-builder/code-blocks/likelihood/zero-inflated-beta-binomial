@@ -1,0 +1,4 @@
+        ## Zero-inflated beta-binomial likelihood.
+        EXTRA_VARIANCE_SWITCH
+        z[n] ~ dbern(p.zero[y.strata[n]])
+        y[n] ~ dbinom(p[n] * (1 - z[n]), y.n[n])

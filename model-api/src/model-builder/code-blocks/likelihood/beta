@@ -1,0 +1,8 @@
+        ## Beta likelihood.
+        alpha[n] <- max(.0001,
+          (mu.p[n]^2 - mu.p[n]^3 - mu.p[n] * sigma.ss[y.site[n], y.strata[n]]^2) /
+              sigma.ss[y.site[n], y.strata[n]]^2)
+        beta[n] <- max(.0001,
+          (mu.p[n] - 2 * mu.p[n]^2 + mu.p[n]^3 - sigma.ss[y.site[n], y.strata[n]]^2 + mu.p[n] * sigma.ss[y.site[n], y.strata[n]]^2) /
+              sigma.ss[y.site[n], y.strata[n]]^2)
+        y[n] ~ dbeta(alpha[n], beta[n])

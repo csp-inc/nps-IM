@@ -1,0 +1,15 @@
+        tau[n] <- 1 / sigma.ss[y.site[n], y.strata[n]]^2
+
+        y[n] ~ dcat(pr[n, 1:nYlevels])
+        y.rep[n] ~ dcat(pr[n, 1:nYlevels])
+
+        pr[n, 1] <- pnorm(theta[1], mu[n] , tau[n])
+        for (k in 2:(nYlevels - 1)) {
+          pr[n, k] <- max(0, pnorm(theta[k] , mu[n] , tau[n]) -
+                            pnorm(theta[k - 1] , mu[n] , tau[n]))
+        }
+        pr[n, nYlevels] <- 1 - pnorm(theta[nYlevels - 1] , mu[n] , tau[n])
+
+        # DIC will compute using the JAGS DIC module.
+        # Posterior predictive loss will probably work using the same formula as
+        # for richness using y.rep.

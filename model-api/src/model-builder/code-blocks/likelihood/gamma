@@ -1,0 +1,3 @@
+        ## Gamma likelihood.
+        sigma.y[n] <- sigma.ss[y.site[n], y.strata[n]]
+        y[n] ~ dgamma(mu[n]^2 / sigma.y[n]^2, mu[n] / sigma.y[n]^2) TRUNCATION_SWITCH

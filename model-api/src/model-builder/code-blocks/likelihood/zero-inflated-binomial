@@ -1,0 +1,4 @@
+        ## Zero-inflated binomial likelihood.
+        p[n] <- mu.p[n]
+        z[n] ~ dbern(p.zero[y.strata[n]])
+        y[n] ~ dbinom(p[n] * (1 - z[n]), y.n[n])

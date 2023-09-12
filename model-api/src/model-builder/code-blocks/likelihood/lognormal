@@ -1,0 +1,6 @@
+        ## Lognormal likelihood.
+        mu.log.y[n] <- log(mu[n]) - 1/2 * log((sigma2[n] + mu[n]^2) / mu[n]^2)
+        tau.log.y[n] <- 1 / sigma.log.y[n]^2
+        sigma2[n] <- sigma.ss[y.site[n], y.strata[n]]^2
+        sigma.log.y[n] <- sqrt(log((sigma2[n] + mu[n]^2) / mu[n]^2))
+        y[n] ~ dlnorm(mu.log.y[n], tau.log.y[n]) TRUNCATION_SWITCH
