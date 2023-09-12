@@ -1,0 +1,7 @@
+        pred.site.mu.p.oos[j.pred[i], x.pred.index[i], k.pred[i]] <- LINK
+            mu.B0[k.pred[i]] + mu.B1[k.pred[i]] * x.pred[i] + X.pred[i, ] %*% Beta
+            )
+        #pred.site.z.oos[j.pred[i], x.pred.index[i], k.pred[i]] ~
+        #    dbern(p.zero[k.pred[i]])
+        pred.site.mean.oos[j.pred[i], x.pred.index[i], k.pred[i]] <-
+            pred.site.mu.p.oos[j.pred[i], x.pred.index[i], k.pred[i]] * (1 - p.zero[k.pred[i]])
