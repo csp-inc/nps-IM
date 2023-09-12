@@ -1,0 +1,6 @@
+        ## Restricted inverse logit deterministic model.
+        MU.P[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
+                          B[y.site[n], 2, y.strata[n]] * x[n] +
+                          X[n, ] %*% Beta)
+        mu.p[n] <- min(max(MU.P[n], .00001), .99999)  # a computational trick
+        logit.mu.p[n] <- logit(mu.p[n])

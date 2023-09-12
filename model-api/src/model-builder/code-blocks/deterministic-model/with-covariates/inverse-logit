@@ -1,0 +1,4 @@
+        ## Inverse logit deterministic model (w/ additional covariates).
+        mu.p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
+                          B[y.site[n], 2, y.strata[n]] * x[n] +
+                          X[n, ] %*% WHICH_BETA)

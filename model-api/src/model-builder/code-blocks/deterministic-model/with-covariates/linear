@@ -1,0 +1,4 @@
+        ## Linear deterministic model (w/ additional covariates).
+        mu[n] <- B[y.site[n], 1, y.strata[n]] +
+                    B[y.site[n], 2, y.strata[n]] * x[n] +
+                    X[n, ] %*% Beta

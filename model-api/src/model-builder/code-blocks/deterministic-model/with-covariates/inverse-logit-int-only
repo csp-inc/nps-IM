@@ -1,0 +1,2 @@
+        ## Inverse logit deterministic model (intercept only).
+        mu.p[n] <- ilogit(B[y.site[n], 1, y.strata[n]])
