@@ -1,0 +1,10 @@
+    # Proportion of landscape in gap size exceeding threshold, y.thresh
+    for(k in 1:y.n.strata) {
+        # y.n.t[k] is the number of years of observations in stratum k
+        for(t in y.years.in.sample[k, 1:y.n.t[k]]) {  
+            tot.spill[k, t] <- sum(spill[ , t, k])
+            tot.gap[k, t] <- sum(y.rep.gap.gt.thresh[ , t, k])
+            tot.length[k, t] <- y.tot.trans.length[k, t] + tot.spill[k, t]
+            prop.gt.thresh[k, t] <- tot.gap[k, t] / tot.length[k, t]
+        }
+    }

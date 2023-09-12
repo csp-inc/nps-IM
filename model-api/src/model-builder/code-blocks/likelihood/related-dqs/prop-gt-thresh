@@ -1,0 +1,9 @@
+        # Quantities needed to compute proportion of landscape in gaps exceeding y.thresh
+        # Length of gap extending beyond transect
+        spill[n, y.t.index[n], y.strata[n]] <- is.censored[n] * (y[n] - censor.limit.vec[n])
+        # New draw of gap size for each stratum and time
+        y.rep.gap[n,  y.t.index[n], y.strata[n]] ~ dlnorm(mu.log.y[n], tau.log.y[n])
+        # Set gap sizes less than y.thresh to zero.
+        y.rep.gap.gt.thresh[n, y.t.index[n], y.strata[n]] <-
+            ifelse(y.rep.gap[n,  y.t.index[n], y.strata[n]] > y.thresh,
+            y.rep.gap[n,  y.t.index[n], y.strata[n]], 0)
