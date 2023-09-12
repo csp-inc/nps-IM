@@ -1,0 +1,7 @@
+            PRED_EPS_TILDE
+            pred.strat.p[t, k] <- LINK
+                B[j.draw[k], 1, k] +
+                  B[j.draw[k], 2, k] * x.pred[i.pred[t, k]] +
+                  X.pred[i.pred[t, k], ] %*% Beta +
+                  site.eps[j.draw[k], k]
+            )

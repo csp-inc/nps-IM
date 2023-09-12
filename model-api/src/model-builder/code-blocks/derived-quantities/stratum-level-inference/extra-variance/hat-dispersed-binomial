@@ -1,0 +1,5 @@
+            HAT_EPS_TILDE
+            hat.strat.p[t, k] <- LINK
+                B[j.draw[k], 1, k] + B[j.draw[k], 2, k] * x.hat[t] +
+                  site.eps[j.draw[k], k]
+                )

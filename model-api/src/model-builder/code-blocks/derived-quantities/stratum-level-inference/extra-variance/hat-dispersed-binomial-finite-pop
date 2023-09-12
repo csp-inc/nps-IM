@@ -1,0 +1,11 @@
+            HAT_EPS_TILDE
+            hat.strat.p[t, k] <- ifelse(j.draw[k] <= y.n.site[k],
+              LINK
+                  B[min(j.draw[k], y.n.site[k]), 1, k] +
+                  B[min(j.draw[k], y.n.site[k]), 2, k] * x.hat[t] +
+                  site.eps[min(j.draw[k], y.n.site[k]), k]
+                  ),
+              LINK
+                  HAT_STRAT_LIN_PRED +
+                  hat.eps.tilde[t, k]
+                  ))

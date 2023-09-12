@@ -1,0 +1,12 @@
+            PRED_EPS_TILDE
+            pred.strat.p[t, k] <- ifelse(j.draw[k] <= y.n.site[k],
+              LINK
+                  B[min(j.draw[k], y.n.site[k]), 1, k] +
+                  B[min(j.draw[k], y.n.site[k]), 2, k] * x.pred[i.pred[t, k]] +
+                  X.pred[i.pred[t, k], ] %*% Beta +
+                  site.eps[min(j.draw[k], y.n.site[k]), k]
+                  ),
+              LINK
+                  HAT_STRAT_LIN_PRED +
+                  pred.eps.tilde[t, k]
+                  ))
