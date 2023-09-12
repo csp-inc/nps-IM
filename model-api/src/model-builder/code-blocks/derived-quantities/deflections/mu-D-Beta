@@ -1,0 +1,6 @@
+      for(k in 1:y.n.strata) {
+        B0.tilde.resp.scale[k] <- LINKB0.tilde[k])
+        for(d in 1:defl.indices[v, 1]) {
+          mu.D[v, d, k] <- LINKB0.tilde[k] + D[v, d])
+        }
+      }

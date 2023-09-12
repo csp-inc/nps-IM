@@ -1,0 +1,20 @@
+    for(v in 1:y.n.deflections) {
+
+      # note: computing deflections may require > 2 levels (TODO: test)
+      # y.n.deflections [scalar/integer]: the total number of sum-to-zero predictors
+      # defl.indices [matrix/integer]:
+      #   rows: the predictor, v, to which the deflection applies
+      #   columns (exactly 3):
+      #     (1) number of levels and
+      #     (2) start (inclusive) and
+      #     (3) stop indices (exclusive)
+
+      for(d in 1:(defl.indices[v, 1] - 1)) {
+        D[v, d] <- Beta[defl.indices[v, 2] + d - 1]
+      }
+      # Compute the negative sum of the others to obtain the final coefficient.
+      D[v, defl.indices[v, 1]] <- -sum(D[v, 1:(defl.indices[v, 1] - 1)])
+
+      MU_D_BLOCK
+
+    }

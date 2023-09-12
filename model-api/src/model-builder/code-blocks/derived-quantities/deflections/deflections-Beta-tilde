@@ -1,0 +1,36 @@
+    #for(k in 1:y.n.strata) {
+      Beta.grp.tilde.raw[1:n.rand.slopes] ~ dmnorm(mu.Beta.raw[, 1], Tau.Beta.raw[, , 1]) # k = 1 hard coded here
+      for (b in 1:n.rand.slopes) {
+        Beta.grp.tilde[b] <- xi[b, 1] * Beta.grp.tilde.raw[b]
+      }
+      for(m in 1:length(X[1, ])) {
+        Beta.tilde[m] <- ifelse(is.rand.slope[m] == 0,
+                                Beta[m],
+                                Beta.grp.tilde[min(m, n.rand.slopes)])
+        Beta.hat[m] <- ifelse(is.rand.slope[m] == 0,
+                                Beta[m],
+                                mu.Beta[min(m, n.rand.slopes), 1])
+
+      }
+    #}
+
+    for(v in 1:y.n.deflections) {
+
+      # note: computing deflections may require > 2 levels (TODO: test)
+      # y.n.deflections [scalar/integer]: the total number of sum-to-zero predictors
+      # defl.indices [matrix/integer]:
+      #   rows: the predictor, v, to which the deflection applies
+      #   columns (exactly 3):
+      #     (1) number of levels and
+      #     (2) start (inclusive) and
+      #     (3) stop indices (exclusive)
+
+      for(d in 1:(defl.indices[v, 1] - 1)) {
+        D[v, d] <- Beta.tilde[defl.indices[v, 2] + d - 1]
+      }
+      # Compute the negative sum of the others to obtain the final coefficient.
+      D[v, defl.indices[v, 1]] <- -sum(D[v, 1:(defl.indices[v, 1] - 1)])
+
+      MU_D_BLOCK
+
+    }
