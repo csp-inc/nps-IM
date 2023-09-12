@@ -1,0 +1,11 @@
+for(i in 1:n.svb) {
+
+    # n.svb: the number of stratum-varying effects
+    # m.k: the index for the ith stratum-varying effect
+    # kappa has dims [n.svb, y.n.strata]
+
+    kappa[i, 1] <- Beta[m.k[i]] # the effect of Beta[m.k[i]] in the reference stratum
+    for (j in 2:y.n.strata) {
+        kappa[m.k[i]+j-1, j] <- Beta[m.k[i]] + Beta[m.k[i]+j-1] # assumes the entries in X are ordered
+    }
+}
