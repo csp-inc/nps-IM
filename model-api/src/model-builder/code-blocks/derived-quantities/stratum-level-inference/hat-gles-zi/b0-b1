@@ -1,0 +1,4 @@
+            hat.strat.mu.p.oos[t, k] <- LINK
+                B.tilde[1, k] + B.tilde[2, k] * x.hat[t]
+            )
+            hat.strat.mean.oos[t, k] <- hat.strat.mu.p.oos[t, k] * (1 - strat.z[k])
