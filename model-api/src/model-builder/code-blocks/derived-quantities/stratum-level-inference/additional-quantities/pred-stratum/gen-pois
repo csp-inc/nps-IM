@@ -1,0 +1,3 @@
+            pred.strat.lambda[t, k] <-
+                (1 - delta[k]) * exp(pred.strat.eta[t, k])
+            pred.strat.mean[t, k] <- pred.strat.lambda[t, k] / (1 - delta[k])
