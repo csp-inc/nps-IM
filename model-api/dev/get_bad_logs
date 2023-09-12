@@ -1,0 +1,17 @@
+for i in $(find logs);
+    do grep -e 'killed' $i;
+        if [ $? -eq 0 ];then
+            echo $i >> killed_logs;
+            cat $i | sed -n '/Success/p' | sed 's/^.*`\(.*\)`.*$/\1/' >> killed_log_paths;
+        fi;
+    grep -e 'Deleting model' $i;
+        if [ $? -eq 0 ];then
+            echo $i >> deleted_model_logs;
+            cat $i | sed -n '/Success/p' | sed 's/^.*`\(.*\)`.*$/\1/' >> deleted_model_paths;
+        fi;
+    grep -e 'Invalid parent values' $i;
+        if [ $? -eq 0 ];then
+            echo $i >> invalid_parent_model_logs;
+            cat $i | sed -n '/Success/p' | sed 's/^.*`\(.*\)`.*$/\1/' >> invalid_parent_model_paths;
+        fi;
+done
